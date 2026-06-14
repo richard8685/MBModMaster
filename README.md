@@ -30,6 +30,14 @@ tests/MBModMaster.SmokeTests/    冒烟测试
 dotnet build
 ```
 
+## 生成便携版
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/publish-portable.ps1
+```
+
+便携版会输出到`artifacts/portable/MBModMaster-win-x64/`，同时生成`artifacts/portable/MBModMaster-win-x64.zip`。该版本为self-contained发布，用户不需要额外安装.NET运行时。
+
 ## 运行测试
 
 ```powershell
