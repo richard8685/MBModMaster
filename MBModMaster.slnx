@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MBModMaster/MBModMaster.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MBModMaster.SmokeTests/MBModMaster.SmokeTests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,464 @@
+<Window x:Class="MBModMaster.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        mc:Ignorable="d"
+        Title="骑砍2 Mod 管理器" Height="720" Width="1100" MinHeight="620" MinWidth="900"
+        Background="Transparent"
+        FontFamily="Microsoft YaHei UI"
+        Icon="Assets/Icons/app-icon.ico"
+        WindowStyle="None"
+        AllowsTransparency="True">
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="38"
+                            ResizeBorderThickness="8"
+                            CornerRadius="12"
+                            GlassFrameThickness="0"
+                            UseAeroCaptionButtons="False" />
+    </shell:WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="GrassInkBrush" Color="#0E100B" />
+        <SolidColorBrush x:Key="PanelBrush" Color="#171A13" />
+        <SolidColorBrush x:Key="PanelAltBrush" Color="#202216" />
+        <SolidColorBrush x:Key="LineBrush" Color="#3B3324" />
+        <SolidColorBrush x:Key="SoftLineBrush" Color="#2C2B20" />
+        <SolidColorBrush x:Key="TextBrush" Color="#F2E8D2" />
+        <SolidColorBrush x:Key="MutedTextBrush" Color="#B6A98B" />
+        <SolidColorBrush x:Key="GoldBrush" Color="#C89A3D" />
+        <SolidColorBrush x:Key="SteppeGreenBrush" Color="#2F8A5E" />
+
+        <LinearGradientBrush x:Key="BannerBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#202416" Offset="0" />
+            <GradientStop Color="#14170F" Offset="0.55" />
+            <GradientStop Color="#2A2112" Offset="1" />
+        </LinearGradientBrush>
+
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="MinWidth" Value="86" />
+            <Setter Property="Padding" Value="14,0" />
+            <Setter Property="Foreground" Value="#F2E8D2" />
+            <Setter Property="Background" Value="#242316" />
+            <Setter Property="BorderBrush" Value="#57472B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#302C19" />
+                    <Setter Property="BorderBrush" Value="#C89A3D" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#7C5B21" />
+                    <Setter Property="BorderBrush" Value="#E2B95D" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="MinWidth" Value="126" />
+            <Setter Property="Background" Value="#2F8A5E" />
+            <Setter Property="BorderBrush" Value="#5BB889" />
+            <Setter Property="Foreground" Value="#FFF8E8" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style x:Key="WindowButton" TargetType="Button">
+            <Setter Property="Width" Value="46" />
+            <Setter Property="Height" Value="38" />
+            <Setter Property="MinWidth" Value="46" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="#F3F6F6" />
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonSurface" Background="{TemplateBinding Background}">
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontFamily="{TemplateBinding FontFamily}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonSurface" Property="Background" Value="#2C363A" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonSurface" Property="Background" Value="#38454A" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GhostIconButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="MinWidth" Value="30" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="#171A13" />
+            <Setter Property="BorderBrush" Value="#463A25" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Padding" Value="10,0" />
+            <Setter Property="Foreground" Value="#F2E8D2" />
+            <Setter Property="Background" Value="#10120C" />
+            <Setter Property="BorderBrush" Value="#3B3324" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="SwitchCheckBox" TargetType="CheckBox">
+            <Setter Property="Width" Value="42" />
+            <Setter Property="Height" Value="22" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Border x:Name="Track" Background="#3A3D35" CornerRadius="11" />
+                            <Ellipse x:Name="Thumb" Width="17" Height="17" Fill="#C8C0AE" HorizontalAlignment="Left" Margin="3,0,0,0" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Track" Property="Background" Value="#2F8A5E" />
+                                <Setter TargetName="Thumb" Property="Fill" Value="#FFF8E8" />
+                                <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right" />
+                                <Setter TargetName="Thumb" Property="Margin" Value="0,0,3,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Track" Property="Background" Value="#2C3029" />
+                                <Setter TargetName="Thumb" Property="Fill" Value="#8D887A" />
+                                <Setter Property="Cursor" Value="Arrow" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="10" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="Transparent">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Opacity="0" IsTabStop="False" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Opacity="0" IsTabStop="False" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Width="6" Margin="2" Background="#6C5631" CornerRadius="3" />
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border x:Name="WindowFrame"
+            Background="#0E100B"
+            BorderBrush="#2E393D"
+            BorderThickness="1"
+            CornerRadius="12"
+            SizeChanged="WindowFrame_SizeChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Background="#1D272A"
+                BorderBrush="#2E393D"
+                BorderThickness="0,0,0,1"
+                CornerRadius="12,12,0,0"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <Grid>
+                <TextBlock Text="骑砍2 Mod 管理器"
+                           Foreground="#C8D0CE"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"
+                           Margin="14,0,0,0" />
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button Content="&#xE921;" Style="{StaticResource WindowButton}" Click="MinimizeButton_Click" />
+                    <Button Content="&#xE922;" Style="{StaticResource WindowButton}" Click="MaximizeButton_Click" />
+                    <Button Content="&#xE8BB;" Style="{StaticResource WindowButton}" Click="CloseButton_Click" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" BorderBrush="#463A25" BorderThickness="0,0,0,1" Padding="24,14,24,14">
+            <Border.Background>
+                <ImageBrush ImageSource="Assets/Images/banner-20260609-153915.png" Stretch="UniformToFill" AlignmentY="Center" />
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="2" Background="#B80E100B" Margin="-24,-14,-24,-14" />
+
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="骑砍2 Mod 管理器" FontSize="28" FontWeight="Bold" Foreground="{StaticResource TextBrush}" />
+                    <TextBlock x:Name="HeaderSummaryTextBlock" Text="骑马与砍杀2 单人Mod管理器" FontSize="13" Foreground="{StaticResource MutedTextBrush}" Margin="2,4,0,0" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Width="390" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Content="启动游戏"
+                            Style="{StaticResource PrimaryButton}"
+                            Height="38"
+                            FontSize="15"
+                            Margin="0,0,0,8"
+                            Click="LaunchButton_Click" />
+                    <UniformGrid Columns="3" Rows="2">
+                        <Button Content="自动排序" Margin="0,0,8,8" Click="AutoSortButton_Click" />
+                        <Button Content="导入Mod" Margin="0,0,8,8" Click="ImportButton_Click" />
+                        <Button Content="刷新" Margin="0,0,0,8" Click="RefreshButton_Click" />
+                        <Button Content="全部启用" Margin="0,0,8,0" Click="EnableAllButton_Click" />
+                        <Button Content="全部禁用" Margin="0,0,8,0" Click="DisableAllButton_Click" />
+                        <Button Content="Mod目录" Margin="0" Click="OpenModulesFolderButton_Click" />
+                    </UniformGrid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="8" Padding="10" Margin="24,12,24,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="搜索Mod" VerticalAlignment="Center" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" Margin="0,0,12,0" />
+                <TextBox Grid.Column="1"
+                         x:Name="SearchTextBox"
+                         TextChanged="SearchTextBox_TextChanged"
+                         ToolTip="输入Mod名称、文件夹名或版本号" />
+                <Button Grid.Column="2" Content="清空" Width="76" Margin="10,0,0,0" Click="ClearSearchButton_Click" />
+                <TextBox x:Name="GameDirectoryTextBox" Visibility="Collapsed" IsReadOnly="True" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="3" Margin="24,0,24,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Background="#202216" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="8" Padding="12,8" Margin="0,0,0,7">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44" />
+                        <ColumnDefinition Width="66" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="112" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="#" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" />
+                    <TextBlock Grid.Column="1" Text="启用" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" />
+                    <TextBlock Grid.Column="2" Text="Mod名称" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" />
+                    <TextBlock Grid.Column="3" Text="版本" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" />
+                    <TextBlock Grid.Column="4" Text="顺序" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1">
+                <ListBox x:Name="ModulesList"
+                         ItemsSource="{Binding}"
+                         PreviewMouseLeftButtonDown="ModulesList_PreviewMouseLeftButtonDown"
+                         MouseMove="ModulesList_MouseMove"
+                         PreviewMouseLeftButtonUp="ModulesList_PreviewMouseLeftButtonUp"
+                         MouseLeave="ModulesList_MouseLeave">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{StaticResource PanelBrush}" BorderBrush="#2C2B20" BorderThickness="1" CornerRadius="8" Padding="12,7">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="44" />
+                                        <ColumnDefinition Width="66" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="120" />
+                                        <ColumnDefinition Width="112" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding LoadOrderText}" Foreground="{StaticResource MutedTextBrush}" FontSize="14" VerticalAlignment="Center" />
+
+                                    <CheckBox Grid.Column="1"
+                                              Style="{StaticResource SwitchCheckBox}"
+                                              IsChecked="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                                              IsEnabled="{Binding CanToggle}"
+                                              Click="ModuleCheckBox_Click" />
+
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" Foreground="{StaticResource TextBrush}" FontSize="14" FontWeight="SemiBold" />
+                                        <Border x:Name="TagBorder" Background="#332B1A" BorderBrush="#6C5631" BorderThickness="1" CornerRadius="9" Padding="7,1" Margin="9,0,0,0">
+                                            <TextBlock Text="{Binding DisplayTagText}" Foreground="#E0B861" FontSize="12" />
+                                        </Border>
+                                    </StackPanel>
+
+                                    <TextBlock Grid.Column="3" Text="{Binding VersionText}" Foreground="#D8C8A4" FontSize="13" VerticalAlignment="Center" />
+
+                                    <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <Button Content="↑" Style="{StaticResource GhostIconButton}" Tag="{Binding}" Click="MoveUpItemButton_Click" />
+                                        <Button Content="↓" Style="{StaticResource GhostIconButton}" Tag="{Binding}" Margin="6,0,0,0" Click="MoveDownItemButton_Click" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding DisplayTagText}" Value="">
+                                    <Setter TargetName="TagBorder" Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Canvas x:Name="DragOverlay" IsHitTestVisible="False" Panel.ZIndex="20">
+                    <Border x:Name="DropIndicator"
+                            Height="3"
+                            Background="#E0B861"
+                            CornerRadius="2"
+                            Visibility="Collapsed" />
+
+                    <Border x:Name="DragPreview"
+                            Height="58"
+                            Padding="12,7"
+                            Background="#E61B2118"
+                            BorderBrush="#D3A349"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Visibility="Collapsed"
+                            Opacity="0.92">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="44" />
+                                <ColumnDefinition Width="66" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="112" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="DragPreviewOrder"
+                                       Foreground="{StaticResource MutedTextBrush}"
+                                       FontSize="14"
+                                       VerticalAlignment="Center" />
+                            <Border Grid.Column="1"
+                                    Width="42"
+                                    Height="22"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Background="#2F8A5E"
+                                    CornerRadius="11">
+                                <Ellipse Width="17"
+                                         Height="17"
+                                         Fill="#FFF8E8"
+                                         HorizontalAlignment="Right"
+                                         Margin="0,0,3,0" />
+                            </Border>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock x:Name="DragPreviewName"
+                                           Foreground="{StaticResource TextBrush}"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           TextTrimming="CharacterEllipsis" />
+                                <Border x:Name="DragPreviewTag"
+                                        Background="#332B1A"
+                                        BorderBrush="#6C5631"
+                                        BorderThickness="1"
+                                        CornerRadius="9"
+                                        Padding="7,1"
+                                        Margin="9,0,0,0">
+                                    <TextBlock x:Name="DragPreviewTagText"
+                                               Foreground="#E0B861"
+                                               FontSize="12" />
+                                </Border>
+                            </StackPanel>
+                            <TextBlock x:Name="DragPreviewVersion"
+                                       Grid.Column="3"
+                                       Foreground="#D8C8A4"
+                                       FontSize="13"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="4"
+                                       Text="拖动中"
+                                       Foreground="{StaticResource MutedTextBrush}"
+                                       FontSize="13"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,14,0" />
+                        </Grid>
+                    </Border>
+                </Canvas>
+            </Grid>
+        </Grid>
+
+        <TextBlock Grid.Row="4" x:Name="StatusTextBlock" Margin="26,12,24,16" Foreground="{StaticResource MutedTextBrush}" />
+    </Grid>
+    </Border>
+</Window>

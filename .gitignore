@@ -1,0 +1,37 @@
+# Build output
+bin/
+obj/
+out/
+publish/
+artifacts/
+
+# IDE and editor state
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test and coverage output
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup-*
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Local app/game state
+*.local.json
+*.local.xml
+*.cache
